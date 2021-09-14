@@ -32,16 +32,22 @@ func NoBitly(w http.ResponseWriter, r *http.Request) {
 		urlProxy, _ := url.Parse(u)
 		http.DefaultClient.Transport = &http.Transport{Proxy: http.ProxyURL(urlProxy)}
 	}
-	log.Println(urlVal)
+
 	req, err := http.NewRequest("GET", string(urlVal), nil)
 	if err != nil {
 		http.Error(w, "the url doesnt exist", http.StatusBadRequest)
 		return
 	}
-	resp, _ := http.DefaultTransport.RoundTrip(req)
+	respReq, _ := http.DefaultTransport.RoundTrip(req)
+	response := map[string]string{"url": respReq.Header.Get("Location")}
+	api := r.URL.Query().Get("api")
+	if api == "true" {
+		json.NewEncoder(w).Encode(response)
 
+		return
+	}
 	temp, _ := template.ParseFiles("src/view/index.html")
-	if err := temp.Execute(w, map[string]string{"Url": resp.Header.Get("Location")}); err != nil {
+	if err := temp.Execute(w, response); err != nil {
 		log.Println(err)
 	}
 

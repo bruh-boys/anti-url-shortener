@@ -31,7 +31,7 @@ func SetupRoutes() error {
 	middleware, _ := httplimit.NewMiddleware(store, httplimit.IPKeyFunc())
 	r.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
 		t, _ := template.ParseFiles("src/view/index.html")
-		t.Execute(rw, map[string]string{"Url": ""})
+		t.Execute(rw, map[string]string{"url": ""})
 
 	}).Methods("GET")
 	r.HandleFunc(`/static/{file:[\w\W\/]+}`, func(w http.ResponseWriter, r *http.Request) {
