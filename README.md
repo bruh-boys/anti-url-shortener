@@ -2,6 +2,7 @@
 
 <div align="center">
 <img src="https://media.discordapp.net/attachments/887003170377719840/887174274538954823/unknown.png?width=537&height=568"/>
+<img src="https://media.discordapp.net/attachments/887003170377719840/887181476980985886/unknown.png"/>
 
 **Also you can use it as an API**
 
