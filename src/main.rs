@@ -11,7 +11,7 @@ fn threads() {
     for _i in 0..NTHREADS {
         let url = url.clone();
         children.push(thread::spawn(move || {
-            let ou = Command::new("./curl")
+            let ou = Command::new("curl")
                 .arg(url)
                 .stdout(Stdio::piped())
                 .output()
