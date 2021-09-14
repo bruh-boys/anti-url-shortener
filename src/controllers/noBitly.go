@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,14 +11,21 @@ import (
 
 func NoBitly(w http.ResponseWriter, r *http.Request) {
 	GetProxy()
-	r.ParseForm()
+
 	if r.Body == http.NoBody {
 		log.Println(proxy)
 		http.Error(w, "the request is empty >:(", http.StatusBadRequest)
 		return
 	}
 
+	r.ParseForm()
+
 	urlVal := r.FormValue("url")
+	if urlVal == "" {
+		var a map[string]string
+		json.NewDecoder(r.Body).Decode(&a)
+		urlVal = a["url"]
+	}
 	if proxy != nil {
 
 		u := fmt.Sprintf("%s:%s/", proxy.IP, proxy.Port)
