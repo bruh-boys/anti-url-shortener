@@ -14,10 +14,11 @@ router.post("/no-bitly", limiter, (req: any, res: any) => {
   const { url } = req.body;
   if (url.match(regex)) {
     console.log(`input: ${url}`);
-    exec(`URL=${url} ./no_bitly`, (stdout: String, stderr: String) => {
+    exec(`./url -t ${url}`, (stdout: String, stderr: String) => {
       res.json({ out: stderr });
     });
   } else {
+    console.log("No match for", url);
     res.json({ out: `not a valid bitly url: ${url}` });
   }
 });
