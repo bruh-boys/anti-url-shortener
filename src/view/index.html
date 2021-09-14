@@ -15,7 +15,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/static/style.css" />
   </head>
 
   <body>
@@ -51,12 +51,20 @@
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
-    <div align="center" id="url">
-      {{.Url}}
-    
-    </div>
+  </div>
+  <div align="center" id="url-result" style="color:white"><p>{{.Url}}</p></div>
+  <script>
+    const url=document.getElementById("url-result")
+    let val=url.innerText
+    console.log(url.innerHTML,val,val=="{{.Url}}");
+    console.log(url.innerText,url.innerHTML=="<p>{{.Url}}</p>",url.innerHTML=="<p>https://ranon-rat.herokuapp.com/</p>")
+   // setTimeout(  ()=>  {if (url.innerText=="{{.Url}}"){
+   //   url.innerText="";
+   // 
+   // }} , 3000);
+  </script>
     <div align="center">
       <img src="https://cdn.discordapp.com/attachments/820472030474272769/887148064786231346/caption.gif" />
       <footer>

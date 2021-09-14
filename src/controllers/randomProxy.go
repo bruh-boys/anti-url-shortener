@@ -18,8 +18,10 @@ const (
 )
 
 func GetProxy() {
+
 	rand.Seed(time.Now().UnixNano())
 	if proxy != nil {
+
 		u := fmt.Sprintf("%s:%s/", proxy.IP, proxy.Port)
 		urlProxy, _ := url.Parse(u)
 		http.DefaultClient.Transport = &http.Transport{Proxy: http.ProxyURL(urlProxy)}
